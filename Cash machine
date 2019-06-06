@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+/**
+ * @author msfata ProgrammingHelp
+ *
+ */
+
+public class MoneySacks {
+	private static boolean validTransaction;
+	private int cashRequest;
+	private int ten;
+	private int twenty;
+	private int fifty;
+
+	public static void main(String[] args) {
+		MoneySacks ms = new MoneySacks();
+		System.out.println("Enter Cash Request !");
+		@SuppressWarnings("resource")
+		Scanner s = new Scanner(System.in);
+		ms.cashRequest = s.nextInt();
+		if (ms.cashRequest <= 300 && ms.cashRequest >= 10 && ms.cashRequest % 10 == 0) {
+			validTransaction = true;
+		} else {
+			validTransaction = false;
+		}
+		if (ms.cashRequest <= 50 && validTransaction && ms.cashRequest % 20 == 0) {
+			ms.ten = 2;
+			ms.twenty = (ms.cashRequest - (ms.ten * 10)) / 20;
+			dispose(ms.ten, ms.twenty, ms.fifty);
+		} else if (ms.cashRequest <= 50 && validTransaction && ms.cashRequest % 10 == 0) {
+			ms.ten = 1;
+			ms.twenty = (ms.cashRequest - (ms.ten * 10)) / 20;
+			dispose(ms.ten, ms.twenty, ms.fifty);
+		} else
+
+		if (MoneySacks.validTransaction && ms.cashRequest > 50) {
+			ms.ten = 10;
+			ms.fifty = (ms.cashRequest - ms.ten) / 50;
+			ms.twenty = (ms.cashRequest - (ms.fifty * 50)) / 20;
+			if (ms.cashRequest == ((ms.fifty * 50) + (ms.twenty * 20))) {
+				ms.ten = 2;
+				ms.twenty = ms.twenty - 1;
+			} else {
+				ms.ten = (ms.cashRequest - ((ms.fifty * 50) + ms.twenty * 20)) / 10;
+			}
+			dispose(ms.ten, ms.twenty, ms.fifty);
+		} else {
+			System.out.println("Not Valid Transaction !");
+		}
+	}
+
+	private static void dispose(int ten, int twenty, int fifty) {
+		System.out.println("Ten Notes = " + ten);
+		System.out.println("Twenty Notes = " + twenty);
+		System.out.println("Fifty Notes = " + fifty);
+	}
+}
